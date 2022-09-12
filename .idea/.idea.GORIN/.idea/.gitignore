@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.GORIN.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\thoma\OneDrive\Bureau\GORIN\.idea\.idea.GORIN\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
