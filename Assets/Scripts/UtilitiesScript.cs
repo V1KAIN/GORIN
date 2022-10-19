@@ -10,7 +10,7 @@ public class UtilitiesScript : MonoBehaviour
     public static void GoToNextScene() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
     public static void GoToPreviousScene() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); }
     public static void GoToIndexScene(int sceneIndex) { SceneManager.LoadScene(sceneIndex);}
-    public static void GoToIndexScene(string sceneName) { SceneManager.LoadScene(sceneName);}
+    public static void GoToSceneWithName(string sceneName) { SceneManager.LoadScene(sceneName);}
 
     #endregion
 
