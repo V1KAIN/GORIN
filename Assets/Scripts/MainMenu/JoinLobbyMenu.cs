@@ -22,9 +22,30 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        NetworkManagerGORIN.OnClientConnected -= HandleClientConnected;
+        NetworkManagerGORIN.OnClientDisconnected -= HandleClientDisconnected;
     }
 
-    void HandleClientConnected(){}
-    void HandleClientDisconnected(){}
+    public void JoinLobby()
+    {
+        string ipAddress = ipAddressInputField.text;
+
+        networkManager.networkAddress = ipAddress;
+        networkManager.StartClient();
+
+        joinButton.interactable = false;
+    }
+
+    void HandleClientConnected()
+    {
+        joinButton.interactable = true;
+        
+        gameObject.SetActive(false);
+        landingPagePanel.SetActive(false);
+    }
+
+    void HandleClientDisconnected()
+    {
+        joinButton.interactable = true;
+    }
 }

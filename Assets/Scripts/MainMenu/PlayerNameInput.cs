@@ -25,7 +25,7 @@ public class PlayerNameInput : MonoBehaviour
         SetPlayerName(defaultName);
     }
 
-    void SetPlayerName(string playerName)
+    public void SetPlayerName(string playerName)
     {
         foreach (var t in toDisable)
         {
