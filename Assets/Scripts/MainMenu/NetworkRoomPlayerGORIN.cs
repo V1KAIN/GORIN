@@ -13,16 +13,14 @@ public class NetworkRoomPlayerGORIN : NetworkBehaviour
    [SerializeField] private TMP_Text[] playerReadyTexts = new TMP_Text[2];
    [SerializeField] private Button startGameButton = null;
 
-   [SyncVar(hook = nameof(HandleDisplayNameChanged))]
+   //[SyncVar(hook = nameof(HandleDisplayNameChanged))]
    public string DisplayName;
 
-   [SyncVar(hook = nameof(HandleReadyStatusChange))]
+   //[SyncVar(hook = nameof(HandleReadyStatusChange))]
    public bool IsReady = false;
 
    private bool isLeader;
 
-   public bool IsLeader()
-   {
-      
-   }
+  // public bool IsLeader() {}
+  //6:18
 }

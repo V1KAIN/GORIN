@@ -69,7 +69,7 @@ public class NetworkManagerGORIN : NetworkManager
             
             NetworkRoomPlayerGORIN roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
-            roomPlayerInstance.IsLeader = isLeader;
+            //roomPlayerInstance.IsLeader = isLeader;
             
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
         }
@@ -97,7 +97,7 @@ public class NetworkManagerGORIN : NetworkManager
     {
         foreach (var player in RoomPlayers)
         {
-            player.HandleReadyToStart(IsReadyToStart());
+            //player.HandleReadyToStart(IsReadyToStart());
         }
     }
 
