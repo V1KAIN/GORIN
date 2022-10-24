@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -66,11 +67,11 @@ public class NetworkRoomPlayerGORIN : NetworkBehaviour
 
    private void UpdateDisplay()
    {
-      if (!isLocalPlayer)
+      if (!hasAuthority)
       {
          foreach (var player in Room.RoomPlayers)
          {
-            if (player.isLocalPlayer)
+            if (player.hasAuthority)
             {
                player.UpdateDisplay();
                break;
@@ -81,8 +82,44 @@ public class NetworkRoomPlayerGORIN : NetworkBehaviour
 
       for (int i = 0; i < playerNameTexts.Length; i++)
       {
-         
+         playerNameTexts[i].text = "Waiting For Player...";
+         playerReadyTexts[i].text = String.Empty;
+      }
+      
+      for (int i = 0; i < Room.RoomPlayers.Count; i++)
+      {
+         playerNameTexts[i].text = Room.RoomPlayers[i].DisplayName;
+         playerReadyTexts[i].text = Room.RoomPlayers[i].IsReady ? 
+            "<color=green>Ready</color>": 
+            "<color=red>Not Ready</color>"; 
       }
    }
-   //9:42
+
+   public void HandleReadyToStart(bool readyToStart)
+   {
+      if(!_isLeader){return;}
+
+      startGameButton.interactable = readyToStart;
+   }
+
+   [Command]
+   private void CmdSetDisplayName(string displayName)
+   {
+      DisplayName = displayName;
+   }
+
+   [Command]
+   public void CmdReadyUp()
+   {
+      IsReady = !IsReady;
+      
+      Room.NotifyPlayersOfReadyState();
+   }
+
+   [Command]
+   public void CmdStartGame()
+   {
+      if (Room.RoomPlayers[0].connectionToClient != connectionToClient){return;}
+      //Start game
+   }
 }
