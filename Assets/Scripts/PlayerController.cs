@@ -5,7 +5,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField]float _walkingSpeed = 3.5f;
@@ -18,8 +18,8 @@ public class PlayerController : NetworkBehaviour
     [Header("Drag & Drop")] 
     [SerializeField] private Animator _playerAnimator;
 
-    [Header("Stats")] 
-    [SyncVar]public int PlayerHealth = 200;
+    //[Header("Stats")] 
+    //[SyncVar]public int PlayerHealth = 200;
     
 
     //Privates
@@ -43,7 +43,7 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-        if (!isLocalPlayer) return;
+        //if (!isLocalPlayer) return;
         
         GetPlayerInputs();
         LookAtMousePosition();
@@ -118,7 +118,7 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("dash available");
     }
 
-    [ClientRpc]
+    //[ClientRpc]
     void AnimateCharacter()
     {
         //Link Animation

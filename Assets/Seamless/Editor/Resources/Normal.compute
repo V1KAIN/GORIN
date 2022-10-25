@@ -1,0 +1,55 @@
+/*
+ * @file    Normal.compute
+ * @author  Leo Chaumartin
+ */
+
+
+#pragma kernel Normal
+
+#include "Common.hlsl"
+
+float Width;
+float Height;
+
+
+RWTexture2D<float4> Output;
+Texture2D<float4> Input;
+
+float uScale;
+
+
+
+[numthreads(8,8,1)]
+void Normal(uint3 id : SV_DispatchThreadID)
+{
+    //float2 lUV = (float2(id.xy) / float2(Width, Height));
+    int2 lTexSize = int2(Width, Height);
+    float4 lInputColor0 = Input[id.xy];
+
+    const float2 size = float2(2.0,0.0);
+    const int2 lAdjacentCoord = int2(1, 1);
+     
+    int2 lCoordList[5] =
+    {
+        int2(id.x,     id.y),
+        int2(WrapTo(id.x - lAdjacentCoord.x, lTexSize.x), id.y),
+        int2(WrapTo(id.x + lAdjacentCoord.x, lTexSize.x), id.y),
+        int2(id.x,     WrapTo(id.y - lAdjacentCoord.y, lTexSize.y)),
+        int2(id.x,     WrapTo(id.y + lAdjacentCoord.y, lTexSize.y))
+    };
+
+    double lHeightScale = uScale * Width / 256.0f;
+    double s11 = (lInputColor0.r) * lHeightScale;
+    double s01 = (Input[lCoordList[1]].r) * lHeightScale;
+    double s21 = (Input[lCoordList[2]].r) * lHeightScale;
+    double s10 = (Input[lCoordList[3]].r) * lHeightScale;
+    double s12 = (Input[lCoordList[4]].r) * lHeightScale;
+    
+
+    float3 vb = normalize(float3(size.yx,s12-s10));
+    float3 va = normalize(float3(size.xy,s21-s01));
+    float4 bump = float4( cross(va,vb), s11 );
+    
+    const float4 lOutputColor = float4((bump.xyz + 1.0) * 0.5, lInputColor0.a);
+    Output[id.xy] = lOutputColor;
+}
