@@ -15,12 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float _dashTime = 3f;
     [SerializeField]float _dashCooldown = 5f;
 
-    [Header("Drag & Drop")] 
-    [SerializeField] private Animator _playerAnimator;
-
-    //[Header("Stats")] 
-    //[SyncVar]public int PlayerHealth = 200;
-    
+    [Header("Player Settings")] 
+    [SerializeField] private float _playerLookAtSpeed = .2f;
+    [Space]
 
     //Privates
     float _curSpeed;
@@ -43,8 +40,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //if (!isLocalPlayer) return;
-        
         GetPlayerInputs();
         LookAtMousePosition();
 
@@ -84,6 +79,8 @@ public class PlayerController : MonoBehaviour
     }
 
     Vector3 mousePos = Vector3.zero;
+    private Quaternion _rotGoal;
+    private Vector3 _lookAtDir;
     void LookAtMousePosition()
     {
         Ray mousePosRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -91,21 +88,21 @@ public class PlayerController : MonoBehaviour
         {
             mousePos = new Vector3(hit.point.x, transform.localPosition.y, hit.point.z);
         }
-        
-        transform.LookAt(mousePos);
+
+        _lookAtDir = (mousePos - transform.position).normalized;
+        _rotGoal = Quaternion.LookRotation(_lookAtDir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
     }
 
     IEnumerator Dash()
     {
         Debug.Log("Dashing");
-        _playerAnimator.SetBool("IsInDash", true);
         _isDashing = true;
         _curSpeed = _dashSpeed;
         yield return new WaitForSeconds(_dashTime);
         _isDashing = false;
         _curSpeed = _walkingSpeed;
         StartCoroutine(nameof(DashRecharge));
-        _playerAnimator.SetBool("IsInDash", false);
         Debug.Log("stop Dashing");
     }
 
@@ -116,11 +113,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
         Debug.Log("dash available");
-    }
-
-    //[ClientRpc]
-    void AnimateCharacter()
-    {
-        //Link Animation
     }
 }
