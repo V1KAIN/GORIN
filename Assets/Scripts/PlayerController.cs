@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     //Hidden
     [HideInInspector] public bool CanMove = true;
 
-    public float curXVel, curZVel;
+    public float curXVel, curZVel, curYVel;
 
     void Start()
     {
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
         curXVel = _characterController.velocity.x;
         curZVel = _characterController.velocity.z;
+        curYVel = _characterController.velocity.y;
     }
 
     private void FixedUpdate()

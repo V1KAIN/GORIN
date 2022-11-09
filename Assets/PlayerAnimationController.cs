@@ -10,8 +10,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     [SerializeField] private GameObject _PlayerModel;
     
-    private float PlayerZVelocity;
-    private float PlayerXVelocity;
+    private float _playerXVelocity, _playerYVelocity, _playerZVelocity;
 
     private void Start()
     {
@@ -28,13 +27,17 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void GetCurrentPlayerVelocity()
     {
-        PlayerXVelocity = _playerController.curXVel;
-        PlayerZVelocity = _playerController.curZVel;
+        _playerXVelocity = Mathf.Clamp(_playerController.curXVel, -1, 1);
+        _playerZVelocity = Mathf.Clamp(_playerController.curZVel, -1, 1);
+        _playerYVelocity = Mathf.Clamp(_playerController.curYVel, -1, 1);
     }
 
     private void LinkAnimationToMovement()
     {
-        _playerAnimator.SetFloat("VelY", PlayerXVelocity);
-        _playerAnimator.SetFloat("VelX", PlayerZVelocity);
+        _playerAnimator.SetFloat("VelY", _playerYVelocity);
+
+        if(gameObject.transform.rotation.eulerAngles.y >= 45 && gameObject.transform.rotation.eulerAngles.y <= 130) {_playerAnimator.SetFloat("VelX", _playerXVelocity);}
+        else if(gameObject.transform.rotation.eulerAngles.y <= -45 && gameObject.transform.rotation.eulerAngles.y >= -130) {_playerAnimator.SetFloat("VelX", -_playerXVelocity);}
+        
     }
 }
