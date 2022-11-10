@@ -30,7 +30,10 @@ public class PlayerController : MonoBehaviour
     //Hidden
     [HideInInspector] public bool CanMove = true;
 
-    public float curXVel, curZVel, curYVel;
+    [Header("DEBUG")]
+    public float curXVel;
+    public float curZVel; 
+    public float curYVel;
 
     void Start()
     {
@@ -66,17 +69,42 @@ public class PlayerController : MonoBehaviour
         }
 
         _curSpeed = _isDashing ? _dashSpeed : _walkingSpeed;
-            
         _characterController.Move(_moveDir);
     }
     
     void GetPlayerInputs()
     {
-        _pInputs.x = (_curSpeed / 100 ) * Input.GetAxisRaw("Horizontal");
-        _pInputs.z = (_curSpeed / 100 ) * Input.GetAxisRaw("Vertical");
+        if (Input.GetButton("Horizontal") && Input.GetButton("Vertical"))
+        {
+            if (_pInputs.x > 0.01f &&  _pInputs.z > 0.01f)
+            {
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+            }
+            if (_pInputs.x < 0.01f &&  _pInputs.z < 0.01f)
+            {
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+            }
+            if (_pInputs.x > 0.01f &&  _pInputs.z < 0.01f)
+            {
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+            }
+            if (_pInputs.x < 0.01f &&  _pInputs.z > 0.01f)
+            {
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+            }
+        }
+        else
+        {
+            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal");
+            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical");
+        }
 
-        if (_canDash && Input.GetButtonDown("Jump")) StartCoroutine(nameof(Dash));
-        else if (Input.GetButtonDown("Jump") && !_canDash) Debug.Log("Dash not available");
+        //if (_canDash && Input.GetButtonDown("Jump")) StartCoroutine(nameof(Dash));
+        //else if (Input.GetButtonDown("Jump") && !_canDash) Debug.Log("Dash not available");
     }
 
     Vector3 mousePos = Vector3.zero;

@@ -22,7 +22,7 @@ public class PlayerAnimationController : MonoBehaviour
         if(_playerAnimator == null || _playerController == null) return;
         
         GetCurrentPlayerVelocity();
-        LinkAnimationToMovement();
+        LinkAnimationToVelocity();
     }
 
     private void GetCurrentPlayerVelocity()
@@ -32,12 +32,29 @@ public class PlayerAnimationController : MonoBehaviour
         _playerYVelocity = Mathf.Clamp(_playerController.curYVel, -1, 1);
     }
 
-    private void LinkAnimationToMovement()
+    private void LinkAnimationToVelocity()
     {
-        _playerAnimator.SetFloat("VelY", _playerYVelocity);
-
-        if(gameObject.transform.rotation.eulerAngles.y >= 45 && gameObject.transform.rotation.eulerAngles.y <= 130) {_playerAnimator.SetFloat("VelX", _playerXVelocity);}
-        else if(gameObject.transform.rotation.eulerAngles.y <= -45 && gameObject.transform.rotation.eulerAngles.y >= -130) {_playerAnimator.SetFloat("VelX", -_playerXVelocity);}
-        
+        //Change Animation angle compared to player object rotation
+        if (gameObject.transform.rotation.eulerAngles.y >= 45 && gameObject.transform.rotation.eulerAngles.y <= 135)
+        {
+            _playerAnimator.SetFloat("VelX", _playerXVelocity);
+            _playerAnimator.SetFloat("VelZ", -_playerZVelocity);
+            
+        }
+        else if (gameObject.transform.rotation.eulerAngles.y <= 315 && gameObject.transform.rotation.eulerAngles.y >= 225)
+        {
+            _playerAnimator.SetFloat("VelX", -_playerXVelocity);
+            _playerAnimator.SetFloat("VelZ", _playerZVelocity);
+        }
+        else if (gameObject.transform.rotation.eulerAngles.y <= 225 && gameObject.transform.rotation.eulerAngles.y >= 135)
+        {
+            _playerAnimator.SetFloat("VelX", -_playerZVelocity);
+            _playerAnimator.SetFloat("VelZ", -_playerXVelocity);
+        }
+        else
+        {
+            _playerAnimator.SetFloat("VelX", _playerZVelocity);
+            _playerAnimator.SetFloat("VelZ", _playerXVelocity);
+        }
     }
 }
