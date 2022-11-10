@@ -20,6 +20,11 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         if(_playerAnimator == null || _playerController == null) return;
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _playerAnimator.SetTrigger("Attack");
+        }
         
         GetCurrentPlayerVelocity();
         LinkAnimationToVelocity();
