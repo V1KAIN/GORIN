@@ -78,23 +78,23 @@ public class PlayerController : MonoBehaviour
         {
             if (_pInputs.x > 0.01f &&  _pInputs.z > 0.01f)
             {
-                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
-                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
             }
             if (_pInputs.x < 0.01f &&  _pInputs.z < 0.01f)
             {
-                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
-                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
             }
             if (_pInputs.x > 0.01f &&  _pInputs.z < 0.01f)
             {
-                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
-                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
             }
             if (_pInputs.x < 0.01f &&  _pInputs.z > 0.01f)
             {
-                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /2;
-                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /2 ;
+                _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
+                _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
             }
         }
         else
@@ -122,25 +122,5 @@ public class PlayerController : MonoBehaviour
         _rotGoal = Quaternion.LookRotation(_lookAtDir);
         transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
     }
-
-    IEnumerator Dash()
-    {
-        Debug.Log("Dashing");
-        _isDashing = true;
-        _curSpeed = _dashSpeed;
-        yield return new WaitForSeconds(_dashTime);
-        _isDashing = false;
-        _curSpeed = _walkingSpeed;
-        StartCoroutine(nameof(DashRecharge));
-        Debug.Log("stop Dashing");
-    }
-
-    IEnumerator DashRecharge()
-    {
-        Debug.Log("Dash recharging");
-        _canDash = false;
-        yield return new WaitForSeconds(_dashCooldown);
-        _canDash = true;
-        Debug.Log("dash available");
-    }
+    
 }
