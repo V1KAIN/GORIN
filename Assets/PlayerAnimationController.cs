@@ -8,8 +8,6 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Animator _playerAnimator;
 
-    [SerializeField] private GameObject _PlayerModel;
-    
     private float _playerXVelocity, _playerYVelocity, _playerZVelocity;
 
     private void Start()
@@ -62,4 +60,9 @@ public class PlayerAnimationController : MonoBehaviour
             _playerAnimator.SetFloat("VelZ", _playerXVelocity);
         }
     }
+
+    public void PlayFireballCastAnimation()
+    {
+        _playerAnimator.SetTrigger("CastOne");
+    } 
 }
