@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,9 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float _walkingSpeed = 3.5f;
     [SerializeField]float _gravity = 20.0f;
     [Space]
-    [SerializeField]float _dashSpeed = 8f;
-    [SerializeField]float _dashTime = 3f;
-    [SerializeField]float _dashCooldown = 5f;
+    [SerializeField]float _dashSpeed = 3f;
+    [SerializeField]float _dashTime = 0.3f;
+    [SerializeField]float _dashCooldown = 4f;
 
     [Header("PlayerInputSettings")] 
     [SerializeField] private KeyCode _attackSpellKey = KeyCode.R;
@@ -33,6 +32,7 @@ public class PlayerController : MonoBehaviour
     Vector3 _moveDir = Vector3.zero;
     private bool _canDash = true;
     private bool _isDashing = false;
+    private bool _lookAtMousePos = true;
         
     //Hidden
     [HideInInspector] public bool CanMove = true;
@@ -77,8 +77,10 @@ public class PlayerController : MonoBehaviour
             _moveDir.y -= _gravity;
         }
 
-        _curSpeed = _isDashing ? _dashSpeed : _walkingSpeed;
-        _characterController.Move(_moveDir);
+        if (!_isDashing)
+        {
+            _characterController.Move(_moveDir);
+        }
     }
     
     void GetPlayerInputs()
@@ -96,8 +98,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
         if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
         if (Input.GetKeyDown(_UltimateSpellKey)) { CastSpell(3); }
-    }
 
+        if (Input.GetButtonDown("Jump") && _canDash && _isDashing == false)
+        {
+            StartCoroutine(nameof(Dash));
+            _dashDir = transform.forward;
+        }
+    }
+    
     void GetSpeedByInputs()
     {
         if (_pInputs.x > 0.01f &&  _pInputs.z > 0.01f)
@@ -135,7 +143,34 @@ public class PlayerController : MonoBehaviour
 
         _lookAtDir = (mousePos - transform.position).normalized;
         _rotGoal = Quaternion.LookRotation(_lookAtDir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
+        if(_lookAtMousePos)transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
+    }
+
+    private Vector3 _dashDir = new Vector3();
+    IEnumerator Dash()
+    {
+        _isDashing = true;
+        _canDash = false;
+        _lookAtMousePos = false;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + _dashTime)
+        {
+            Debug.Log("CurrentlyDashing");
+            _characterController.Move(_dashDir * _dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        _isDashing = false;
+        _canDash = true;
+        _lookAtMousePos = true;
+        RechargeDash();
+    }
+
+    IEnumerator RechargeDash()
+    {
+        _canDash = false;
+        yield return new WaitForSeconds(_dashCooldown);
+        _canDash = true;
     }
 
     //1 = AttackSpell || 2 = SupportSpell || 3 = UltimateSpell

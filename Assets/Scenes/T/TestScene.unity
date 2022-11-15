@@ -20490,8 +20490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkingSpeed: 4
   _gravity: 0.13
-  _dashSpeed: 8
-  _dashTime: 3
+  _dashSpeed: 15
+  _dashTime: 0.25
   _dashCooldown: 5
   _attackSpellKey: 114
   _supportSpellKey: 102
