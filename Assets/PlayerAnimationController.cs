@@ -18,11 +18,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         if(_playerAnimator == null || _playerController == null) return;
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            _playerAnimator.SetTrigger("Attack");
-        }
         
         GetCurrentPlayerVelocity();
         LinkAnimationToVelocity();
@@ -69,5 +64,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void DashAnimation()
     {
         _playerAnimator.SetTrigger("Dash");
+    }
+
+    public void PlayAttackAnimation()
+    {
+        _playerAnimator.SetTrigger("Attack");
     }
 }

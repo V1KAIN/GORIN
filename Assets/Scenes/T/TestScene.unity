@@ -20694,6 +20694,7 @@ GameObject:
   - component: {fileID: 1162803868}
   - component: {fileID: 1162803870}
   - component: {fileID: 1162803871}
+  - component: {fileID: 1162803872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -20723,7 +20724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162803865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19214192, y: 0, z: 3.1247454}
+  m_LocalPosition: {x: -0.19214192, y: 1.1, z: 5.433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20745,12 +20746,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkingSpeed: 4
   _gravity: 0.13
-  _dashSpeed: 6
-  _dashTime: 1.1
+  _dashSpeed: 25
+  _dashTime: 0.2
   _dashCooldown: 5
-  _attackSpellKey: 114
-  _supportSpellKey: 102
-  _UltimateSpellKey: 119
   _playerLookAtSpeed: 0.05
   _playerModelAnimator: {fileID: 0}
   _groundLayer:
@@ -20806,6 +20804,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCombatCollisionObjects: []
   _combatCollisionActive: 0
+--- !u!114 &1162803872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162803865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4171088313e96419cbf3fff6e5513b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSpellKey: 114
+  _supportSpellKey: 102
+  _UltimateSpellKey: 119
 --- !u!1 &1163333841
 GameObject:
   m_ObjectHideFlags: 0
@@ -25782,37 +25795,6 @@ Transform:
   m_Father: {fileID: 1000614855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1516737641
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1516737642}
-  m_Layer: 0
-  m_Name: SpellCastPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1516737642
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516737641}
-  m_LocalRotation: {x: -0.24106002, y: -0.65290123, z: 0.47250894, w: 0.5406898}
-  m_LocalPosition: {x: -0.011, y: 0.077, z: 0.086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1140235014095789537}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 20.875, y: -88.085, z: 62.098}
 --- !u!1 &1520256339
 GameObject:
   m_ObjectHideFlags: 0
@@ -39675,7 +39657,6 @@ Transform:
   - {fileID: 1444946631402868135}
   - {fileID: 1013833310947088509}
   - {fileID: 1432348122218742900}
-  - {fileID: 1516737642}
   m_Father: {fileID: 3691202411103581915}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58509,7 +58490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireballPrefab: {fileID: 389166211230137564, guid: 9634e8fc883acdf44bbe4aedc3c62dcc, type: 3}
-  _fireballSpawnPoint: {fileID: 1516737641}
+  _fireballSpawnPoint: {fileID: 0}
   _playerObject: {fileID: 1162803865}
 --- !u!1 &6428250443839836070
 GameObject:

@@ -14,10 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float _dashTime = 0.3f;
     [SerializeField]float _dashCooldown = 4f;
 
-    [Header("PlayerInputSettings")] 
-    [SerializeField] private KeyCode _attackSpellKey = KeyCode.R;
-    [SerializeField] private KeyCode _supportSpellKey = KeyCode.F;
-    [SerializeField] private KeyCode _UltimateSpellKey = KeyCode.W;
+    
 
 
     [Header("Settings")] 
@@ -96,15 +93,14 @@ public class PlayerController : MonoBehaviour
             _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical");
         }
 
-        if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
-        if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-        if (Input.GetKeyDown(_UltimateSpellKey)) { CastSpell(3); }
-
-        if (Input.GetButtonDown("Jump") && _canDash && _isDashing == false)
+        
+        
+        if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
         {
             StartCoroutine(nameof(Dash));
             transform.rotation = _rotGoal;
             _dashDir = transform.forward;
+            _canDash = false;
         }
     }
     
@@ -140,11 +136,11 @@ public class PlayerController : MonoBehaviour
         Ray mousePosRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mousePosRay, out RaycastHit hit, float.MaxValue, _groundLayer))
         {
-            mousePos = new Vector3(hit.point.x, transform.localPosition.y, hit.point.z);
+            mousePos = new Vector3(hit.point.x, hit.point.y, hit.point.z);
         }
-
+        
         _lookAtDir = (mousePos - transform.position).normalized;
-        _rotGoal = Quaternion.LookRotation(_lookAtDir);
+        _rotGoal = Quaternion.LookRotation(_lookAtDir); _rotGoal.x = 0; _rotGoal.z = 0;
         if(_lookAtMousePos)transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
     }
 
@@ -164,9 +160,8 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         _isDashing = false;
-        _canDash = true;
         _lookAtMousePos = true;
-        RechargeDash();
+        StartCoroutine(nameof(RechargeDash));
     }
 
     IEnumerator RechargeDash()
@@ -176,26 +171,20 @@ public class PlayerController : MonoBehaviour
         _canDash = true;
     }
 
-    //1 = AttackSpell || 2 = SupportSpell || 3 = UltimateSpell
-    private void CastSpell(int spellId)
-    {
-        switch (spellId)
-        {
-            case 1:
-                Debug.Log("Casted AttackSpell");
-                _playerModelAnimator.PlayFireballCastAnimation();
-                break;
-            case 2:
-                Debug.Log("Casted SupportSpell");
-                break;
-            case 3:
-                Debug.Log("Casted UltimateSpell");
-                break;
-        }
-    }
+    
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(mousePos,0.5f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(mousePos,0.1f);
+        Gizmos.DrawLine(transform.position, mousePos);
+        
+        Gizmos.color = Color.green;
+        
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.22f);
     }
 }
+
+
