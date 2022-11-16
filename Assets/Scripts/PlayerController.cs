@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _UltimateSpellKey = KeyCode.W;
 
 
-    [Header("Player Settings")] 
+    [Header("Settings")] 
     [SerializeField] private float _playerLookAtSpeed = .2f;
     [SerializeField] private PlayerAnimationController _playerModelAnimator;
+    [SerializeField] private LayerMask _groundLayer;
     
     [Space]
     //Privates
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _canDash && _isDashing == false)
         {
             StartCoroutine(nameof(Dash));
+            transform.rotation = _rotGoal;
             _dashDir = transform.forward;
         }
     }
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviour
     void LookAtMousePosition()
     {
         Ray mousePosRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(mousePosRay, out RaycastHit hit))
+        if (Physics.Raycast(mousePosRay, out RaycastHit hit, float.MaxValue, _groundLayer))
         {
             mousePos = new Vector3(hit.point.x, transform.localPosition.y, hit.point.z);
         }
@@ -153,6 +155,7 @@ public class PlayerController : MonoBehaviour
         _canDash = false;
         _lookAtMousePos = false;
         float startTime = Time.time;
+        _playerModelAnimator.DashAnimation();
 
         while (Time.time < startTime + _dashTime)
         {
@@ -189,5 +192,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Casted UltimateSpell");
                 break;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(mousePos,0.5f);
     }
 }

@@ -64,5 +64,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void PlayFireballCastAnimation()
     {
         _playerAnimator.SetTrigger("CastOne");
-    } 
+    }
+
+    public void DashAnimation()
+    {
+        _playerAnimator.SetTrigger("Dash");
+    }
 }
