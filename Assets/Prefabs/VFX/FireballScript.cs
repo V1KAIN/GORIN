@@ -9,6 +9,6 @@ public class FireballScript : MonoBehaviour
    
    private void Update()
    {
-      transform.position += transform.right * Time.deltaTime * _fireballTravelSpeed;
+      transform.position += transform.forward * Time.deltaTime * _fireballTravelSpeed;
    }
 }

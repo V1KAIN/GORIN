@@ -11,11 +11,12 @@ public class AnimationEventManagerScript : MonoBehaviour
      
     public void LaunchFireBall()
     {
-        Quaternion fireballRot = _fireballSpawnPoint.transform.rotation;
+        Vector3 dir = _playerObject.transform.forward;
+        Quaternion fireballRot =  _fireballSpawnPoint.transform.rotation;
         fireballRot.x = 0;
         fireballRot.z = 0;
-        
-        Instantiate(_fireballPrefab, _fireballSpawnPoint.transform.position, fireballRot);
+
+        GameObject fireball = Instantiate(_fireballPrefab, _fireballSpawnPoint.transform.position, fireballRot);
     }
     
 }
