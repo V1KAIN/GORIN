@@ -180,8 +180,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(transform.position, mousePos);
         
         Gizmos.color = Color.green;
-        
-        
+
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, 0.22f);
     }

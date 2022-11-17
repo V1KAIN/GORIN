@@ -11,7 +11,6 @@ public class AnimationEventManagerScript : MonoBehaviour
      
     public void LaunchFireBall()
     {
-        Vector3 dir = _playerObject.transform.forward;
         Quaternion fireballRot =  _fireballSpawnPoint.transform.rotation;
         fireballRot.x = 0;
         fireballRot.z = 0;
