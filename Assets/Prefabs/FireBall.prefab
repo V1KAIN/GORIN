@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8354579002823671727}
   - component: {fileID: 8354579002823671724}
   - component: {fileID: 8354579002823671725}
-  - component: {fileID: 8354579002823671698}
   m_Layer: 2
   m_Name: AlphaB
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8354579002823671698
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8354579002823671699}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8354579003055303420
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +94,6 @@ GameObject:
   - component: {fileID: 8354579003055303416}
   - component: {fileID: 8354579003055303417}
   - component: {fileID: 8354579003055303422}
-  - component: {fileID: 8354579003055303423}
   m_Layer: 2
   m_Name: AlphaG
   m_TagString: Untagged
@@ -182,20 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8354579003055303423
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8354579003055303420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8354579003207577154
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +179,7 @@ GameObject:
   - component: {fileID: 8354579003207577183}
   - component: {fileID: 8354579003207577180}
   - component: {fileID: 6739118619209155445}
+  - component: {fileID: 4761789722680907236}
   m_Layer: 2
   m_Name: FireBall
   m_TagString: Untagged
@@ -248,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireballTravelSpeed: 8
   _lifeTime: 3
+  _damage: 50
   _spellPreviewZone: {fileID: 8354579003326755691}
 --- !u!198 &8354579003207577183
 ParticleSystem:
@@ -5040,10 +5012,26 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.03
+  m_Radius: 0.8
   m_Height: 2.19
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4761789722680907236
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354579003207577154}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8354579003321098982
 GameObject:
   m_ObjectHideFlags: 0
@@ -5055,7 +5043,6 @@ GameObject:
   - component: {fileID: 8354579003321098978}
   - component: {fileID: 8354579003321098979}
   - component: {fileID: 8354579003321098976}
-  - component: {fileID: 8354579003321098977}
   m_Layer: 2
   m_Name: AlphaR
   m_TagString: Untagged
@@ -5128,20 +5115,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8354579003321098977
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8354579003321098982}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8354579003326755691
 GameObject:
   m_ObjectHideFlags: 0

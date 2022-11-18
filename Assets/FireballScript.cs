@@ -7,6 +7,7 @@ public class FireballScript : MonoBehaviour
 {
    [SerializeField] private float _fireballTravelSpeed;
    [SerializeField] private float _lifeTime = 5;
+   [SerializeField] private int _damage = 50;
    [SerializeField] private GameObject _spellPreviewZone;
    private float lifeTimeLeft = 1;
    
@@ -33,7 +34,7 @@ public class FireballScript : MonoBehaviour
    {
       if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
       {
-          newPreviewPos = new Vector3(transform.position.x, hit.transform.position.y + 0.1f, transform.position.z);
+         newPreviewPos = new Vector3(transform.position.x, hit.transform.position.y + 0.1f, transform.position.z);
          _spellPreviewZone.transform.position = newPreviewPos;
       }
    }
@@ -41,6 +42,21 @@ public class FireballScript : MonoBehaviour
    void DestroyFireball()
    {
       Destroy(gameObject);
+   }
+
+   private void OnTriggerEnter(Collider other)
+   {
+      if (other.tag != "Killable")
+      {
+         Debug.Log("Ball touched " + other.name);
+         DestroyFireball();
+      }
+
+      if (other.CompareTag("Killable"))
+      {
+         other.GetComponent<KillableObject>().TakeDamage(_damage);
+         DestroyFireball();
+      } 
    }
 
    private void OnDrawGizmos()

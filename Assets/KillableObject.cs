@@ -1,14 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class KillableObject
+public abstract class KillableObject : MonoBehaviour
 {
-    protected int ObjectBaseLife = 200;
+    [SerializeField]protected int ObjectBaseLife = 200;
     protected int ObjectCurLife;
 
-    public void TakeDamage() {}
-    public void GetLifeBack() {}
+    private void Start()
+    {
+        ObjectCurLife = ObjectBaseLife;
+    }
 
-    public abstract void DieEffect();
+    private void Update()
+    {
+        CheckDeath();
+    }
+
+    public void TakeDamage(int value)
+    {
+        ObjectCurLife -= value;
+        Debug.Log(gameObject.name + " lose " + value + " health points");
+        Debug.Log("Updated to " + ObjectCurLife + " health points");
+    }
+
+    public void GetLifeBack(int value)
+    {
+        ObjectCurLife += value;
+        Debug.Log(gameObject.name + " get " + value + " health points back");
+        Debug.Log("Updated to " + ObjectCurLife + " health points");
+    }
+
+    public void CheckDeath()
+    {
+        if (ObjectCurLife <= 0)
+        {
+            ObjectDie();
+        }
+    }
+
+    public void ObjectDie()
+    {
+        DeathEffect();
+    }
+
+    public abstract void DeathEffect();
+    
 }

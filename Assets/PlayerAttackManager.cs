@@ -13,7 +13,7 @@ public class PlayerAttackManager : MonoBehaviour
     
     
     private PlayerAnimationController _playerModelAnimator;
-    private bool _isAttacking = false;
+    
 
     private void Start()
     {
@@ -28,11 +28,18 @@ public class PlayerAttackManager : MonoBehaviour
 
     void GetPlayerInputs()
     {
-        if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
-        if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-        if (Input.GetKeyDown(_UltimateSpellKey)) { CastSpell(3); }
-        
-        if (Input.GetButtonDown("Fire1")) { _playerModelAnimator.PlayAttackAnimation();}
+        if (!_isAttacking)
+        {
+            if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
+            if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
+            if (Input.GetKeyDown(_UltimateSpellKey)) { CastSpell(3); }
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                _playerModelAnimator.PlayAttackAnimation();
+                StartCoroutine(nameof(SlashCooldown));
+            }
+        }
     }
 
     //1 = AttackSpell || 2 = SupportSpell || 3 = UltimateSpell
@@ -42,7 +49,11 @@ public class PlayerAttackManager : MonoBehaviour
         {
             case 1:
                 Debug.Log("Casted AttackSpell");
-                _playerModelAnimator.PlayFireballCastAnimation();
+                if (_haveFireball)
+                {
+                    _playerModelAnimator.PlayFireballCastAnimation();
+                    StartCoroutine(nameof(FireballCooldown));
+                }
                 break;
             case 2:
                 Debug.Log("Casted SupportSpell");
@@ -51,5 +62,25 @@ public class PlayerAttackManager : MonoBehaviour
                 Debug.Log("Casted UltimateSpell");
                 break;
         }
+    }
+
+    [Header("Cooldowns")]
+    [SerializeField] private float _normalSlashCD;
+    [SerializeField] private bool _isAttacking = false;
+    
+    [SerializeField] private float _fireballCD;
+    [SerializeField] private bool _haveFireball = true;
+    private IEnumerator SlashCooldown()
+    {
+        _isAttacking = true;
+        yield return new WaitForSeconds(_normalSlashCD);
+        _isAttacking = false;
+    } 
+    
+    private IEnumerator FireballCooldown()
+    {
+        _haveFireball = false;
+        yield return new WaitForSeconds(_fireballCD);
+        _haveFireball = true;
     }
 }
