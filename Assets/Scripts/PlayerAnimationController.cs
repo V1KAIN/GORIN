@@ -61,6 +61,11 @@ public class PlayerAnimationController : MonoBehaviour
         _playerAnimator.SetTrigger("CastOne");
     }
 
+    public void PlayTornadoAnimation()
+    {
+        _playerAnimator.SetTrigger("UltimateCast");
+    }
+
     public void DashAnimation()
     {
         _playerAnimator.SetTrigger("Dash");

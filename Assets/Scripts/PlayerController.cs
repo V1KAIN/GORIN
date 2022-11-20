@@ -13,10 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float _dashSpeed = 3f;
     [SerializeField]float _dashTime = 0.3f;
     [SerializeField]float _dashCooldown = 4f;
-
     
-
-
     [Header("Settings")] 
     [SerializeField] private float _playerLookAtSpeed = .2f;
     [SerializeField] private PlayerAnimationController _playerModelAnimator;
@@ -26,6 +23,7 @@ public class PlayerController : MonoBehaviour
     //Privates
     float _curSpeed;
     CharacterController _characterController;
+    PlayerAttackManager _attackController;
     Vector3 _pInputs = Vector3.zero;
     Vector3 _moveDir = Vector3.zero;
     private bool _canDash = true;
@@ -43,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _attackController = GetComponent<PlayerAttackManager>();
         _curSpeed = _walkingSpeed;
 
         _playerModelAnimator = GetComponent<PlayerAnimationController>();
@@ -171,7 +170,16 @@ public class PlayerController : MonoBehaviour
         _canDash = true;
     }
 
-    
+    public void ResetCooldowns()
+    {
+        _canDash = true;
+        _isDashing = false;
+        _attackController.ResetCooldowns();
+        Debug.Log("Reset all cooldowns apart form UltimateSkill");
+    }
+
+
+
 
     private void OnDrawGizmos()
     {

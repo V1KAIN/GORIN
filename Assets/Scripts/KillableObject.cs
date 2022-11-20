@@ -5,8 +5,8 @@ using UnityEngine;
 
 public abstract class KillableObject : MonoBehaviour
 {
-    [SerializeField]protected int ObjectBaseLife = 200;
-    protected int ObjectCurLife;
+    public int ObjectBaseLife = 200;
+    [SerializeField] public int ObjectCurLife;
 
     private void Start()
     {
@@ -16,6 +16,7 @@ public abstract class KillableObject : MonoBehaviour
     private void Update()
     {
         CheckDeath();
+        RebaseLife();
     }
 
     public void TakeDamage(int value)
@@ -43,6 +44,15 @@ public abstract class KillableObject : MonoBehaviour
     public void ObjectDie()
     {
         DeathEffect();
+    }
+
+    void RebaseLife()
+    {
+        if (ObjectCurLife > ObjectBaseLife)
+        {
+            ObjectCurLife = ObjectBaseLife;
+            Debug.Log(name + " current life went over base life, rebase current health points to base points");
+        }
     }
 
     public abstract void DeathEffect();

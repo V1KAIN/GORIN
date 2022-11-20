@@ -24,6 +24,7 @@ public class PlayerAttackManager : MonoBehaviour
     private void Update()
     {
         GetPlayerInputs();
+        CheckUltimate();
     }
 
     void GetPlayerInputs()
@@ -32,7 +33,7 @@ public class PlayerAttackManager : MonoBehaviour
         {
             if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
             if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-            if (Input.GetKeyDown(_UltimateSpellKey)) { CastSpell(3); }
+            if (Input.GetKeyDown(_UltimateSpellKey) ) { CastSpell(3); }
 
             if (Input.GetButtonDown("Fire1"))
             {
@@ -49,7 +50,7 @@ public class PlayerAttackManager : MonoBehaviour
         {
             case 1:
                 Debug.Log("Casted AttackSpell");
-                if (_haveFireball)
+                if (_haveAttackSpell)
                 {
                     _playerModelAnimator.PlayFireballCastAnimation();
                     StartCoroutine(nameof(FireballCooldown));
@@ -59,6 +60,7 @@ public class PlayerAttackManager : MonoBehaviour
                 Debug.Log("Casted SupportSpell");
                 break;
             case 3:
+                _playerModelAnimator.PlayTornadoAnimation();
                 Debug.Log("Casted UltimateSpell");
                 break;
         }
@@ -69,7 +71,12 @@ public class PlayerAttackManager : MonoBehaviour
     [SerializeField] private bool _isAttacking = false;
     
     [SerializeField] private float _fireballCD;
-    [SerializeField] private bool _haveFireball = true;
+    [SerializeField] private bool _haveAttackSpell = true;
+    [SerializeField] private bool _haveSupportSpell = true;
+    [SerializeField] private bool _haveUltimateSpell = true;
+
+    [SerializeField] private int _ultimatePointsNeeded; 
+    private bool _canUseUltimate = false;
     private IEnumerator SlashCooldown()
     {
         _isAttacking = true;
@@ -79,8 +86,25 @@ public class PlayerAttackManager : MonoBehaviour
     
     private IEnumerator FireballCooldown()
     {
-        _haveFireball = false;
+        _haveAttackSpell = false;
         yield return new WaitForSeconds(_fireballCD);
-        _haveFireball = true;
+        _haveAttackSpell = true;
+    }
+
+    private int _ultimatePoints;
+    private void CheckUltimate()
+    {
+        if (_ultimatePoints >= _ultimatePointsNeeded)
+        {
+            _canUseUltimate = true;
+        }
+    }
+
+    public void ResetCooldowns()
+    {
+        StopAllCoroutines();
+        _isAttacking = false;
+        _haveAttackSpell = true;
+        _haveSupportSpell = true;
     }
 }

@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class AnimationEventManagerScript : MonoBehaviour
 {
+    [SerializeField] private GameObject _playerCaster;
+    
+    [Header("Fireball")]
     [SerializeField] private GameObject _fireballPrefab;
     [SerializeField] private GameObject _fireballSpawnPoint;
-    [SerializeField] private GameObject _playerObject;
+
+    [Header("Tornado")] 
+    [SerializeField] private GameObject _tornadoPrefab;
+    [SerializeField] private GameObject _tornadoSpawnPoint;
+    
     
      
     public void LaunchFireBall()
@@ -17,5 +25,11 @@ public class AnimationEventManagerScript : MonoBehaviour
 
         GameObject fireball = Instantiate(_fireballPrefab, _fireballSpawnPoint.transform.position, fireballRot);
     }
-    
+
+    public void LaunchTornado()
+    {
+        GameObject tornado = Instantiate(_tornadoPrefab, _tornadoSpawnPoint.transform.position, quaternion.identity);
+        tornado.GetComponent<TornadoScript>().CasterObject = _playerCaster;
+        tornado.transform.SetParent(_playerCaster.transform);
+    }
 }
