@@ -33,7 +33,7 @@ public class PlayerAttackManager : MonoBehaviour
         {
             if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
             if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-            if (Input.GetKeyDown(_UltimateSpellKey) ) { CastSpell(3); }
+            if (Input.GetKeyDown(_UltimateSpellKey) && _haveUltimateSpell) { CastSpell(3); }
 
             if (Input.GetButtonDown("Fire1"))
             {
@@ -69,8 +69,9 @@ public class PlayerAttackManager : MonoBehaviour
     [Header("Cooldowns")]
     [SerializeField] private float _normalSlashCD;
     [SerializeField] private bool _isAttacking = false;
-    
     [SerializeField] private float _fireballCD;
+    
+    [Space]
     [SerializeField] private bool _haveAttackSpell = true;
     [SerializeField] private bool _haveSupportSpell = true;
     [SerializeField] private bool _haveUltimateSpell = true;
@@ -100,6 +101,21 @@ public class PlayerAttackManager : MonoBehaviour
         }
     }
 
+    public void AddUltimatePoint()
+    {
+        _ultimatePoints++;
+    }
+
+    public void ConsumeOneUltimatePoint()
+    {
+        _ultimatePoints--;
+    }
+
+    public void UseAllUltimatePoints()
+    {
+        _ultimatePoints = 0;
+    }   
+    
     public void ResetCooldowns()
     {
         StopAllCoroutines();

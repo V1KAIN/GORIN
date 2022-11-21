@@ -6,6 +6,12 @@ using UnityEngine;
 public class AnimationEventManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject _playerCaster;
+
+    [Header("FootEffect")] 
+    [SerializeField] private GameObject _stepEffect;
+    [SerializeField] private GameObject _leftFootPos;
+    [SerializeField] private GameObject _rightFootPos;
+    
     
     [Header("Fireball")]
     [SerializeField] private GameObject _fireballPrefab;
@@ -30,6 +36,16 @@ public class AnimationEventManagerScript : MonoBehaviour
     {
         GameObject tornado = Instantiate(_tornadoPrefab, _tornadoSpawnPoint.transform.position, quaternion.identity);
         tornado.GetComponent<TornadoScript>().CasterObject = _playerCaster;
-        tornado.transform.SetParent(_playerCaster.transform);
+        
+    }
+
+    public void RightFootEffect()
+    {
+        //GameObject walkEffect = Instantiate(_stepEffect, _rightFootPos.transform.position, quaternion.identity);
+    }
+
+    public void LeftFootEffect()
+    {
+        //GameObject walkEffect = Instantiate(_stepEffect, _leftFootPos.transform.position, quaternion.identity);
     }
 }
