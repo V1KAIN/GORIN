@@ -12,14 +12,15 @@ public class AnimationEventManagerScript : MonoBehaviour
     [SerializeField] private GameObject _leftFootPos;
     [SerializeField] private GameObject _rightFootPos;
     
-    
     [Header("Fireball")]
     [SerializeField] private GameObject _fireballPrefab;
     [SerializeField] private GameObject _fireballSpawnPoint;
-
     [Header("Tornado")] 
     [SerializeField] private GameObject _tornadoPrefab;
     [SerializeField] private GameObject _tornadoSpawnPoint;
+    [Header("Shield")] 
+    [SerializeField] private GameObject _shieldPrefab;
+    [SerializeField] private GameObject _shieldSpawnPoint;
     
     
      
@@ -37,6 +38,12 @@ public class AnimationEventManagerScript : MonoBehaviour
         GameObject tornado = Instantiate(_tornadoPrefab, _tornadoSpawnPoint.transform.position, quaternion.identity);
         tornado.GetComponent<TornadoScript>().CasterObject = _playerCaster;
         
+    }
+
+    public void CreateShield()
+    {
+        GameObject shield = Instantiate(_shieldPrefab, _shieldSpawnPoint.transform.position, quaternion.identity);
+        shield.GetComponent<ReinforceScript>()._playerObject = _playerCaster;
     }
 
     public void RightFootEffect()

@@ -8,6 +8,8 @@ public abstract class KillableObject : MonoBehaviour
     public int ObjectBaseLife = 200;
     [SerializeField] public int ObjectCurLife;
 
+    public bool IsReinforced;
+
     private void Start()
     {
         ObjectCurLife = ObjectBaseLife;
@@ -21,8 +23,17 @@ public abstract class KillableObject : MonoBehaviour
 
     public void TakeDamage(int value)
     {
-        ObjectCurLife -= value;
-        Debug.Log(gameObject.name + " lose " + value + " health points");
+        if (IsReinforced)
+        {
+            ObjectCurLife -= Mathf.RoundToInt(value * 0.40f);
+            Debug.Log(gameObject.name + " lose " + Mathf.RoundToInt(value * 0.40f) + " health points");
+        }
+        else
+        {
+            ObjectCurLife -= value;    
+            Debug.Log(gameObject.name + " lose " + value + " health points");
+        }
+        
         Debug.Log("Updated to " + ObjectCurLife + " health points");
     }
 

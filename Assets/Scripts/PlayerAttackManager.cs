@@ -9,9 +9,6 @@ public class PlayerAttackManager : MonoBehaviour
     [SerializeField] private KeyCode _attackSpellKey = KeyCode.R;
     [SerializeField] private KeyCode _supportSpellKey = KeyCode.F;
     [SerializeField] private KeyCode _UltimateSpellKey = KeyCode.W;
-    
-    
-    
     private PlayerAnimationController _playerModelAnimator;
     
 
@@ -33,7 +30,7 @@ public class PlayerAttackManager : MonoBehaviour
         {
             if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
             if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-            if (Input.GetKeyDown(_UltimateSpellKey) && _haveUltimateSpell) { CastSpell(3); }
+            if (Input.GetKeyDown(_UltimateSpellKey) && _canUseUltimate) { CastSpell(3); }
 
             if (Input.GetButtonDown("Fire1"))
             {
@@ -57,10 +54,16 @@ public class PlayerAttackManager : MonoBehaviour
                 }
                 break;
             case 2:
+                if (_haveSupportSpell)
+                {
+                    _haveSupportSpell = false;
+                    _playerModelAnimator.PlayReinforceAnimation();
+                }
                 Debug.Log("Casted SupportSpell");
                 break;
             case 3:
                 _playerModelAnimator.PlayTornadoAnimation();
+                UseAllUltimatePoints();
                 Debug.Log("Casted UltimateSpell");
                 break;
         }
@@ -70,11 +73,11 @@ public class PlayerAttackManager : MonoBehaviour
     [SerializeField] private float _normalSlashCD;
     [SerializeField] private bool _isAttacking = false;
     [SerializeField] private float _fireballCD;
+    [SerializeField] private float _reinforceCD;
     
     [Space]
     [SerializeField] private bool _haveAttackSpell = true;
     [SerializeField] private bool _haveSupportSpell = true;
-    [SerializeField] private bool _haveUltimateSpell = true;
 
     [SerializeField] private int _ultimatePointsNeeded; 
     private bool _canUseUltimate = false;
@@ -90,6 +93,13 @@ public class PlayerAttackManager : MonoBehaviour
         _haveAttackSpell = false;
         yield return new WaitForSeconds(_fireballCD);
         _haveAttackSpell = true;
+    }
+
+    public IEnumerator ReinforceCooldown()
+    {
+        _haveSupportSpell = false;
+        yield return new WaitForSeconds(_reinforceCD);
+        _haveSupportSpell = true;
     }
 
     private int _ultimatePoints;
@@ -114,6 +124,7 @@ public class PlayerAttackManager : MonoBehaviour
     public void UseAllUltimatePoints()
     {
         _ultimatePoints = 0;
+        _canUseUltimate = false;
     }   
     
     public void ResetCooldowns()

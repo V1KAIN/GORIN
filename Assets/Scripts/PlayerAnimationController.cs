@@ -56,23 +56,13 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    public void PlayFireballCastAnimation()
-    {
-        _playerAnimator.SetTrigger("CastOne");
-    }
+    public void PlayFireballCastAnimation() { _playerAnimator.SetTrigger("CastOne"); }
 
-    public void PlayTornadoAnimation()
-    {
-        _playerAnimator.SetTrigger("UltimateCast");
-    }
+    public void PlayTornadoAnimation() { _playerAnimator.SetTrigger("UltimateCast"); }
 
-    public void DashAnimation()
-    {
-        _playerAnimator.SetTrigger("Dash");
-    }
+    public void DashAnimation() { _playerAnimator.SetTrigger("Dash"); }
+    
+    public void PlayAttackAnimation() { _playerAnimator.SetTrigger("Attack"); }
 
-    public void PlayAttackAnimation()
-    {
-        _playerAnimator.SetTrigger("Attack");
-    }
+    public void PlayReinforceAnimation() { _playerAnimator.SetTrigger("Reinforce");}
 }
