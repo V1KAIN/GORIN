@@ -403,7 +403,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ace02ac741b774c409fbcec9271974f4, type: 2}
+    m_Motion: {fileID: 7400000, guid: f9d0e2e3a3bc9164b9d96c2c3a5559e7, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -411,7 +411,7 @@ BlendTree:
     m_DirectBlendParameter: VelY
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 582f2bf45bf62fe498c189eadb4c864a, type: 2}
+    m_Motion: {fileID: 7400000, guid: b186413fa53a75945a99b6e035654381, type: 2}
     m_Threshold: 0.2
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -422,7 +422,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 5ffb293edc80d9f40b46df81ccbf8648, type: 2}
     m_Threshold: 0.4
     m_Position: {x: -1, y: 0}
-    m_TimeScale: 1.25
+    m_TimeScale: 1.8
     m_CycleOffset: 0
     m_DirectBlendParameter: VelY
     m_Mirror: 0
@@ -430,7 +430,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 2f2dce7c65600674e901af007f213604, type: 2}
     m_Threshold: 0.6
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 1.25
+    m_TimeScale: 1.8
     m_CycleOffset: 0
     m_DirectBlendParameter: VelY
     m_Mirror: 0
@@ -456,7 +456,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Dead
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 11622875595553019}
   m_Solo: 0
