@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6250015804343994874}
   - component: {fileID: 7596786009183890253}
   - component: {fileID: 1556772791584230435}
+  - component: {fileID: 3832943070699577974}
   m_Layer: 0
   m_Name: TornadoPrefab
   m_TagString: Untagged
@@ -60,6 +61,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CasterObject: {fileID: 0}
+  _lifeTime: 50
+  _timeBetweenDamages: 1.5
+  _damage: 25
+  _dealDamageTo: []
+--- !u!54 &3832943070699577974
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250015804343994873}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &9037506075298773133
 GameObject:
   m_ObjectHideFlags: 0

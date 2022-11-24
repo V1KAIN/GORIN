@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")] 
     [SerializeField] private float _playerLookAtSpeed = .2f;
     [SerializeField] private PlayerAnimationController _playerModelAnimator;
+    [SerializeField] private MeshTrailScript _meshTrail;
     [SerializeField] private LayerMask _groundLayer;
     
     [Space]
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _attackController = GetComponent<PlayerAttackManager>();
         _playerModelAnimator = GetComponent<PlayerAnimationController>();
+        _meshTrail = GetComponent<MeshTrailScript>();
     }
 
     void Update()
@@ -154,6 +156,7 @@ public class PlayerController : MonoBehaviour
         _isDashing = true;
         _canDash = false;
         _lookAtMousePos = false;
+        _meshTrail.StartTrail();
         float startTime = Time.time;
         _playerModelAnimator.DashAnimation();
 
