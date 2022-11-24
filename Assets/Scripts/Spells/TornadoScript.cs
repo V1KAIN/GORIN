@@ -9,8 +9,6 @@ public class TornadoScript : MonoBehaviour
     [SerializeField] private float _lifeTime = 7f;
     [SerializeField] private float _timeBetweenDamages = 2.5f;
     
-    
-    
     [SerializeField] private int _damage = 20;
     private void Start()
     {
@@ -31,7 +29,15 @@ public class TornadoScript : MonoBehaviour
             timer = _timeBetweenDamages;
             DealDamage();
         }
-        
+
+
+        for (int i = 0; i < _dealDamageTo.Count; i++)
+        {
+            if (_dealDamageTo[i] == null)
+            {
+                _dealDamageTo.Remove(_dealDamageTo[i]);
+            }
+        }
     }
 
 

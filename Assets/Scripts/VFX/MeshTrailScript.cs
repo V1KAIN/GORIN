@@ -7,8 +7,9 @@ public class MeshTrailScript : MonoBehaviour
 {
     [Header("Effect")]
     [SerializeField] Material _effectMaterial;
-    
-    [Header("Trail Options")]
+
+    [Header("Trail Options")] 
+    [SerializeField] private GameObject _flashEffect;
     [SerializeField] private float _meshFrameRate;
     [SerializeField] private float _meshDestroyDelay;
     [SerializeField] private float _activeTime;
@@ -17,9 +18,12 @@ public class MeshTrailScript : MonoBehaviour
     [SerializeField] private float _shaderVarRate;
     [SerializeField] private float _shaderRefreshRate;
     
-    
-
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+
+    private void Start()
+    {
+        _flashEffect.SetActive(false);
+    }
 
     IEnumerator ActivateTrail(float timeActive)
     {
@@ -54,6 +58,7 @@ public class MeshTrailScript : MonoBehaviour
 
     public void StartTrail()
     {
+        StartCoroutine(PlayFlashEffect());
         StartCoroutine(ActivateTrail(_activeTime));
     }
 
@@ -67,5 +72,12 @@ public class MeshTrailScript : MonoBehaviour
             mat.SetFloat(shaderVarRef, valueToAnimate);
             yield return new WaitForSeconds(refreshRate);
         }
+    }
+
+    IEnumerator PlayFlashEffect()
+    {
+        _flashEffect.SetActive(true);
+        yield return new WaitForSeconds(_activeTime);
+        _flashEffect.SetActive(false);
     }
 }

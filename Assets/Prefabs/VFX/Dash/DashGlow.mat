@@ -53,13 +53,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.68
     - _AlphaClip: 0
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _FreselPower: 1.25
+    - _FreselPower: 1.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -68,5 +68,5 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color01: {r: 0.6431373, g: 1.0039216, b: 3.8588235, a: 0}
+    - _Color01: {r: 6.4116645, g: 8.238016, b: 8.238017, a: 0}
   m_BuildTextureStacks: []
