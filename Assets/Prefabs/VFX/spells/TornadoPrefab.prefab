@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CasterObject: {fileID: 0}
-  _lifeTime: 50
+  _lifeTime: 8
   _timeBetweenDamages: 1.5
   _damage: 25
   _dealDamageTo: []
