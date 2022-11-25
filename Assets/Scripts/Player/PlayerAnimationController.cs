@@ -65,4 +65,6 @@ public class PlayerAnimationController : MonoBehaviour
     public void PlayAttackAnimation() { _playerAnimator.SetTrigger("Attack"); }
 
     public void PlayReinforceAnimation() { _playerAnimator.SetTrigger("Reinforce");}
+    
+    public void PlayDeadAnimation(){ _playerAnimator.SetTrigger("Dead"); }
 }

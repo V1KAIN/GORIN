@@ -4926,8 +4926,8 @@ Transform:
   m_GameObject: {fileID: 7648812662375228858}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 4.42, y: 0.07, z: 5.61}
-  m_LocalScale: {x: 5.1631, y: 5.1630993, z: 5.1630993}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7648812662107766713}
   - {fileID: 7902889263754970827}
@@ -9742,7 +9742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teleportEffect: {fileID: 7415004466403695729}
-  _effectTime: 0.3
+  _effectTime: 0.5
   _rechargeTime: 5
   _teleportManager: {fileID: 0}
   _canTeleport: 1

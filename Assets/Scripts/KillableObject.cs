@@ -8,6 +8,8 @@ public abstract class KillableObject : MonoBehaviour
     public int ObjectBaseLife = 200;
     [SerializeField] public int ObjectCurLife;
 
+    [HideInInspector]public bool IsDead = false;
+
     public bool IsReinforced;
 
     private void Start()
@@ -46,8 +48,9 @@ public abstract class KillableObject : MonoBehaviour
 
     public void CheckDeath()
     {
-        if (ObjectCurLife <= 0)
+        if (ObjectCurLife <= 0 && IsDead == false)
         {
+            IsDead = true;
             ObjectDie();
         }
     }
