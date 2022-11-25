@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class OrbManager : MonoBehaviour
 {
@@ -65,7 +66,9 @@ public class OrbManager : MonoBehaviour
 
     public void SpawnRandomSupportOrb(Transform spawnPos)
     {
-        
+        int orbType = Random.Range(0, _supportOrbsPrefabs.Count);
+
+        Instantiate(_supportOrbsPrefabs[orbType], spawnPos.position, Quaternion.identity);
     }
 
     public void SpawnUltimateOrb()
