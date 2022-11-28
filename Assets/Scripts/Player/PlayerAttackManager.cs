@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerAttackManager : MonoBehaviour
 {
@@ -34,7 +35,10 @@ public class PlayerAttackManager : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                _playerModelAnimator.PlayAttackAnimation();
+                int slashAnim = Random.Range(0, 100);
+                
+                if(slashAnim >= 50) _playerModelAnimator.PlayAttackOneAnimation();
+                else _playerModelAnimator.PlayAttackTwoAnimation();
                 StartCoroutine(nameof(SlashCooldown));
             }
         }

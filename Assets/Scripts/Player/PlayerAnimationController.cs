@@ -62,7 +62,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void DashAnimation() { _playerAnimator.SetTrigger("Dash"); }
     
-    public void PlayAttackAnimation() { _playerAnimator.SetTrigger("Attack"); }
+    public void PlayAttackOneAnimation() { _playerAnimator.SetTrigger("AttackOne"); }
+    public void PlayAttackTwoAnimation() { _playerAnimator.SetTrigger("AttackTwo"); }
 
     public void PlayReinforceAnimation() { _playerAnimator.SetTrigger("Reinforce");}
     

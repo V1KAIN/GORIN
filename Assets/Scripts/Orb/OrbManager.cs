@@ -20,12 +20,12 @@ public class OrbManager : MonoBehaviour
     [SerializeField] private float _ultimateOrbRespawnTime = 15f;
 
     private List<GameObject> _currentActiveOrbs;
-
-
+    
     private float _supportTimer = 0f;
     private float _ultimateTimer = 0f;
     private void Update()
     {
+        /*
         _supportTimer += Time.deltaTime;
         _ultimateTimer += Time.deltaTime;
 
@@ -61,7 +61,7 @@ public class OrbManager : MonoBehaviour
             {
                 _currentActiveOrbs.Remove(_currentActiveOrbs[i]);
             }
-        }
+        }*/
     }
 
     public void SpawnRandomSupportOrb(Transform spawnPos)
