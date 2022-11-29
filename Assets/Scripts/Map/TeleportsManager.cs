@@ -22,12 +22,28 @@ public class TeleportsManager : MonoBehaviour
         ResetTeleport();
         return availablePoints[randomPoint];
     }
+    
+    public Transform GetTargetWithoutOrigin()
+    {
+        int randomPoint = Random.Range(0, _teleportsObjects.Count);
+        _teleportsObjects[randomPoint].GetComponent<TeleportPointsScript>().PlayEffect();
+        RefreshTeleport();
+        return _teleportsObjects[randomPoint];
+    }
 
     void ResetTeleport()
     {
         foreach (Transform teleportObject in _teleportsObjects)
         {
             teleportObject.GetComponent<TeleportPointsScript>().StartCoroutine("ResetTeleport");
+        }
+    }
+
+    void RefreshTeleport()
+    {
+        foreach (Transform tpPoint in _teleportsObjects)
+        {
+            tpPoint.GetComponent<TeleportPointsScript>().StartCoroutine("MiniRefreshTeleport");
         }
     }
 }

@@ -11,7 +11,7 @@ public class UltimateOrbScript : Orb
 
     public override void OrbVisualEffectTaken()
     {
-        
+        Destroy(gameObject);
     }
 
     public override void OrbVisualEffectSpawn()

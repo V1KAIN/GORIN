@@ -1,81 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class OrbManager : MonoBehaviour
 {
-    [Header("Map Options")]
-    [SerializeField] private List<Transform> _supportOrbSpawnerPoints;
-    [SerializeField] private List<Transform> _ultimateOrbSpawnerPoints;
-    
-    [Header("Orbs")]
-    [SerializeField] private List<GameObject> _supportOrbsPrefabs;
-    [SerializeField] private GameObject _ultimateOrbPrefab;
+    [SerializeField] private List<GameObject> _orbsToSpawnPrefabs;
+    [SerializeField] private Transform _orbParent;
+    [SerializeField] private float _respawnTime;
 
-    [Header("Options")]
-    [SerializeField] private bool _canRespawn = true;
-    [SerializeField] private float _respawnDelay = 8f;
-    [SerializeField] private float _ultimateOrbRespawnTime = 15f;
+    protected GameObject _currentPlacedOrb;
 
-    private List<GameObject> _currentActiveOrbs;
-    
-    private float _supportTimer = 0f;
-    private float _ultimateTimer = 0f;
+
+    private void Start()
+    {
+        orbRespawnTimer = _respawnTime;
+    }
+
     private void Update()
     {
-        /*
-        _supportTimer += Time.deltaTime;
-        _ultimateTimer += Time.deltaTime;
-
-        if (_supportTimer >= _respawnDelay)
-        {
-            foreach (GameObject orb in _currentActiveOrbs)
-            {
-                Destroy(orb);
-            }
-            
-            foreach (Transform point in _supportOrbSpawnerPoints)
-            {
-                SpawnRandomSupportOrb(point);    
-            }
-        }
-        
-        if (_ultimateTimer >= _ultimateOrbRespawnTime)
-        {
-            foreach (GameObject orb in _currentActiveOrbs)
-            {
-                Destroy(orb);
-            }
-            
-            foreach (Transform point in _supportOrbSpawnerPoints)
-            {
-                SpawnRandomSupportOrb(point);    
-            }
-        }
-        
-        for (int i = 0; i < _currentActiveOrbs.Count; i++)
-        {
-            if (_currentActiveOrbs[i] == null)
-            {
-                _currentActiveOrbs.Remove(_currentActiveOrbs[i]);
-            }
-        }*/
+        ManageOrbSpawn();
     }
 
-    public void SpawnRandomSupportOrb(Transform spawnPos)
+    public void SpawnRandomOrb()
     {
-        int orbType = Random.Range(0, _supportOrbsPrefabs.Count);
+        int randomOrb = Random.Range(0, _orbsToSpawnPrefabs.Count);
 
-        Instantiate(_supportOrbsPrefabs[orbType], spawnPos.position, Quaternion.identity);
+        _currentPlacedOrb = Instantiate(_orbsToSpawnPrefabs[randomOrb], _orbParent.position, quaternion.identity);
+        _currentPlacedOrb.transform.SetParent(_orbParent);
     }
 
-    public void SpawnUltimateOrb()
+
+    private float orbRespawnTimer = 0;
+    void ManageOrbSpawn()
     {
-        
+        if (_currentPlacedOrb == null)
+        {
+            orbRespawnTimer -= Time.deltaTime;
+        }
+
+        if (orbRespawnTimer <= 0)
+        {
+            SpawnRandomOrb();
+            orbRespawnTimer = _respawnTime;
+        }
     }
-    
-    
-    
 }

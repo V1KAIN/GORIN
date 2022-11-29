@@ -22,6 +22,7 @@ public abstract class Orb : MonoBehaviour
         {
             _taken = true;
             OrbEffect(other.gameObject);
+            OrbVisualEffectTaken();
         }   
     }
 }

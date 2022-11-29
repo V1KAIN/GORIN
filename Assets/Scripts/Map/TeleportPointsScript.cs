@@ -35,11 +35,28 @@ public class TeleportPointsScript : MonoBehaviour
         toTeleport.position = newPos;
         toTeleport.GetComponent<CharacterController>().enabled = true;
     }
+    
+    private void WaterTeleport(Transform toTeleport)
+    {
+        toTeleport.GetComponent<CharacterController>().enabled = false;
+        Vector3 newPos = _teleportManager.GetComponent<TeleportsManager>().GetTarget(gameObject.transform).position;
+        toTeleport.position = newPos;
+        toTeleport.GetComponent<CharacterController>().enabled = true;
+    }
+    
+    
 
     public IEnumerator ResetTeleport()
     {
         _canTeleport = false;
         yield return new WaitForSeconds(_rechargeTime);
+        _canTeleport = true;
+    }
+    
+    public IEnumerator MiniRefreshTeleport()
+    {
+        _canTeleport = false;
+        yield return new WaitForSeconds(0.05f);
         _canTeleport = true;
     }
 
