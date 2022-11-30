@@ -5,8 +5,10 @@ using UnityEngine;
 public class MovingWallScript : MonoBehaviour
 {
     [HideInInspector]public bool _isWallUp;
+    [SerializeField] private Animator _wallAnimator;
+    [SerializeField] private GameObject _movingWallManager;
     
-    IEnumerator SetWallUp()
+    public IEnumerator SetWallUp()
     {
         _isWallUp = false;
         //Wait for animation time
@@ -14,7 +16,7 @@ public class MovingWallScript : MonoBehaviour
         _isWallUp = true;
     }
 
-    IEnumerator SetWallDown()
+    public IEnumerator SetWallDown()
     {
         _isWallUp = true;
         //Wait for animation time
