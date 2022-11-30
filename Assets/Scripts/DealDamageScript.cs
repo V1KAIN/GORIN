@@ -10,8 +10,8 @@ public class DealDamageScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Killable"))
-        { 
+        if (other.CompareTag("Killable") && !_toAvoidDamage.Contains(other.gameObject))
+        {
             other.GetComponent<KillableObject>().TakeDamage(_damageValueOnCollision);
         }
     }
