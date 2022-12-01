@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingWallScript : MonoBehaviour
 {
-    [HideInInspector]public bool _isWallUp;
+    public bool _isWallUp;
     [SerializeField] private Animator _wallAnimator;
     [SerializeField] private GameObject _movingWallManager;
     
@@ -12,7 +12,8 @@ public class MovingWallScript : MonoBehaviour
     {
         _isWallUp = false;
         //Wait for animation time
-        yield return new WaitForSeconds(.1f);
+        _wallAnimator.SetTrigger("GetWallUp");
+        yield return new WaitForSeconds(.25f);
         _isWallUp = true;
     }
 
@@ -20,8 +21,8 @@ public class MovingWallScript : MonoBehaviour
     {
         _isWallUp = true;
         //Wait for animation time
-
-        yield return new WaitForSeconds(.1f);
+        _wallAnimator.SetTrigger("GetWallDown");
+        yield return new WaitForSeconds(.25f);
         _isWallUp = false;
     }
 }

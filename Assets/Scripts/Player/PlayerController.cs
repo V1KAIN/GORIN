@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimationController _playerModelAnimator;
     [SerializeField] private MeshTrailScript _meshTrail;
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private bool _movementRelativeToRot;
+    [SerializeField] private bool _dashForward;
     
     [Space]
     //Privates
@@ -56,6 +58,9 @@ public class PlayerController : MonoBehaviour
         curXVel = _characterController.velocity.x;
         curZVel = _characterController.velocity.z;
         curYVel = _characterController.velocity.y;
+        
+        
+        
     }
 
     private void FixedUpdate()
@@ -67,7 +72,11 @@ public class PlayerController : MonoBehaviour
     {
         if (CanMove)
         {
-            _moveDir = (Vector3.right * _pInputs.x) + (Vector3.forward * _pInputs.z);    
+            if(!_movementRelativeToRot){_moveDir = (Vector3.right * _pInputs.x) + (Vector3.forward * _pInputs.z);}
+            else
+            {
+                _moveDir = (transform.right * _pInputs.x) + (transform.forward * _pInputs.z);
+            }    
         }
         
         if (!_characterController.isGrounded)
@@ -92,14 +101,19 @@ public class PlayerController : MonoBehaviour
             _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal");
             _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical");
         }
-
-        
         
         if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
         {
             StartCoroutine(nameof(Dash));
             transform.rotation = _rotGoal;
-            _dashDir = transform.forward;
+            if (_dashForward)
+            {
+                _dashDir = transform.forward;
+            }
+            else
+            {
+                _dashDir = _moveDir * 10;
+            }
             _canDash = false;
         }
     }
@@ -185,10 +199,7 @@ public class PlayerController : MonoBehaviour
         _attackController.ResetCooldowns();
         Debug.Log("Reset all cooldowns apart form UltimateSkill");
     }
-
-
-
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

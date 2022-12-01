@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,24 +6,46 @@ using UnityEngine;
 public class MovingWallsManager : MonoBehaviour
 {
     public List<GameObject> MovingWallsInScene;
-    [SerializeField] private bool _wallAreUp;
+    private bool _wallsAreUp;
 
+
+    private void Start()
+    {
+        _wallsAreUp = false;
+    }
 
     public void WallsGoUp()
     {
+        _wallsAreUp = true;
         foreach (GameObject wall in MovingWallsInScene)
         {
-            wall.GetComponent<MovingWallScript>().StartCoroutine("SetWallUp");
+            Debug.Log( wall.name +" is going up");
+            
+            if (wall.GetComponent<MovingWallScript>()._isWallUp == false)
+            {
+                wall.GetComponent<MovingWallScript>().StartCoroutine("SetWallUp");    
+            }
         }
-        _wallAreUp = true;
     }
 
     public void WallsGoDown()
     {
+        _wallsAreUp = false;
         foreach (GameObject wall in MovingWallsInScene)
         {
-            wall.GetComponent<MovingWallScript>().StartCoroutine("SetWallDown");
+            Debug.Log( wall.name +" is going down");
+            
+            if (wall.GetComponent<MovingWallScript>()._isWallUp)
+            {
+                wall.GetComponent<MovingWallScript>().StartCoroutine("SetWallDown");    
+            }
+            
         }
-        _wallAreUp = false;
+    }
+
+    public void ChangeWallState()
+    {
+        if (_wallsAreUp == false) { WallsGoUp(); }
+        else if (_wallsAreUp) { WallsGoDown(); }
     }
 }
