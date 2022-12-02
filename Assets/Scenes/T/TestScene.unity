@@ -1893,7 +1893,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26710
+  m_Name: pb_Mesh26814
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -6519,7 +6519,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8013652
+  m_Name: pb_Mesh26314
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -6755,8 +6755,8 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _movementRelativeToRot: 0
-  _dashForward: 0
+  _movementRelativeToRot: 1
+  _dashForward: 1
   CanMove: 1
   curXVel: 0
   curZVel: 0
@@ -8368,7 +8368,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8017434
+  m_Name: pb_Mesh26338
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -8705,11 +8705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02762f248099f944db3deb04e1324930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovingWallsInScene:
-  - {fileID: 2010076107}
-  - {fileID: 1405497105}
-  - {fileID: 108963383}
-  - {fileID: 80953939}
+  MovingWallsInScene: []
 --- !u!1 &1510757910
 GameObject:
   m_ObjectHideFlags: 0
@@ -8851,7 +8847,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8031710
+  m_Name: pb_Mesh26492
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9630,7 +9626,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02762f248099f944db3deb04e1324930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovingWallsInScene: []
+  MovingWallsInScene:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &1807616240
 PrefabInstance:
   m_ObjectHideFlags: 0
