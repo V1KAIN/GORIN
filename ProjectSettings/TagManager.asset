@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Killable
+  - Wall
+  - TeleportManager
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -16,8 +20,8 @@ TagManager:
   - PlayerDash
   - Outlined
   - Ground
-  - 
-  - 
+  - Player
+  - Wall
   - 
   - 
   - 

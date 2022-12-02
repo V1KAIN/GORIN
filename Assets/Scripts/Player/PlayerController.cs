@@ -76,7 +76,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _moveDir = (transform.right * _pInputs.x) + (transform.forward * _pInputs.z);
-            }    
+            } 
+            _moveDir.Normalize();
         }
         
         if (!_characterController.isGrounded)
@@ -92,16 +93,10 @@ public class PlayerController : MonoBehaviour
     
     void GetPlayerInputs()
     {
-        if (Input.GetButton("Horizontal") && Input.GetButton("Vertical"))
-        {
-            GetSpeedByInputs();
-        }
-        else
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal");
-            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical");
-        }
-        
+        _pInputs.x = (_curSpeed ) * Input.GetAxis("Horizontal");
+        _pInputs.z = (_curSpeed ) * Input.GetAxis("Vertical");
+
+
         if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
         {
             StartCoroutine(nameof(Dash));
@@ -119,7 +114,7 @@ public class PlayerController : MonoBehaviour
     }
     
     void GetSpeedByInputs()
-    {
+    {/*
         if (_pInputs.x > 0.01f &&  _pInputs.z > 0.01f)
         {
             _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
@@ -144,7 +139,7 @@ public class PlayerController : MonoBehaviour
         {
             _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal");
             _pInputs.z = (_curSpeed / 100) * Input.GetAxis("Vertical");
-        }
+        }*/
         
     }
 
