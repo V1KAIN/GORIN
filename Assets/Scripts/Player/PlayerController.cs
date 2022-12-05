@@ -75,9 +75,8 @@ public class PlayerController : MonoBehaviour
             if(!_movementRelativeToRot){_moveDir = (Vector3.right * _pInputs.x) + (Vector3.forward * _pInputs.z);}
             else
             {
-                _moveDir = (transform.right * _pInputs.x) + (transform.forward * _pInputs.z);
-            } 
-            _moveDir.Normalize();
+                _moveDir = (transform.right * _pInputs.normalized.x) + (transform.forward * _pInputs.normalized.z);
+            }
         }
         
         if (!_characterController.isGrounded)
