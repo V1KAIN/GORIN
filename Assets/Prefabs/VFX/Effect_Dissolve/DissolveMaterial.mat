@@ -24,14 +24,15 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: da28d00739cc0204a954b579fb367b1f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2450
   stringTagMap:
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -59,21 +60,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _Blend: 0
+    - _AlphaClip: 1
+    - _Blend: 1
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 2
-    - _DissolveAmount: 0.399
-    - _DissolveScale: 40.91
+    - _DissolveAmount: 0
+    - _DissolveScale: 40
     - _DissolveWidth: 0.02
     - _DstBlend: 0
-    - _Metallic: 0.11
-    - _NormalStrength: 3.1
+    - _Metallic: 0
+    - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.61
+    - _Smoothness: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
@@ -82,5 +83,5 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _DissolveColor: {r: 10.934184, g: 10.934184, b: 10.934184, a: 0}
+    - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
