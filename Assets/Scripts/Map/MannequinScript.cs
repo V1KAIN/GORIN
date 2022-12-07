@@ -7,6 +7,15 @@ public class MannequinScript : KillableObject
     public override void DeathEffect()
     {
         Debug.Log(gameObject.name + " is dead");
-        Destroy(gameObject);
+        
+        GetComponent<SwitchToDissolveScript>().SwitchALLToDissolveMaterial();
+        DissolveObject();
     }
+    
+    void DissolveObject()
+    {
+        GetComponent<SwitchToDissolveScript>().StartCoroutine("StartFadeOut");
+    } 
+    
+    
 }
