@@ -7,12 +7,8 @@ public class SwitchToDissolveScript : MonoBehaviour
 {
    [SerializeField] private List<MeshRenderer> _toChangeMaterial;
    [SerializeField] private Material _newMaterial;
-   
-   private float dAmount;
-   private void Update()
-   {
-      
-   }
+
+   private List<Material> newMatOnObject = new List<Material>();
 
    [ContextMenu("SwitchAll")]
    public void SwitchALLToDissolveMaterial()
@@ -20,20 +16,28 @@ public class SwitchToDissolveScript : MonoBehaviour
       foreach (MeshRenderer renderer in _toChangeMaterial)
       {
          renderer.material = _newMaterial;
+         newMatOnObject.Add(renderer.material);
       }
    }
-
-   public float dissolveSpeed;
    
+   public MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
    
    public IEnumerator StartFadeOut()
    {
-      foreach (MeshRenderer renderer in _toChangeMaterial)
+      yield return new WaitForSeconds(.01f);
+      float t = 0;
+      while (t < 1f)
       {
-         dAmount = Mathf.Lerp(0,1, Time.deltaTime * dissolveSpeed);
-         renderer.material.SetFloat("_DissolveAmount", dAmount) ;
+         t += Time.deltaTime ;
+         //propertyBlock.SetFloat("_DissolveAmount", t);
+         for (int i = 0; i < _toChangeMaterial.Count; i++)
+         {
+//            _toChangeMaterial[i].SetPropertyBlock(propertyBlock);
+               newMatOnObject[i].SetFloat("_DissolveAmount" ,t);
+            
+         }
+         yield return null;
       }
-      yield return new WaitForSeconds(1);
       Destroy(gameObject);
    }
 }
