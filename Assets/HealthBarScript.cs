@@ -9,38 +9,22 @@ public class HealthBarScript : MonoBehaviour
 {
     [SerializeField] private GameObject _assignedPlayer;
     [SerializeField] private Image _healthBar;
-    
-    private int _playerCurLife;
+    [SerializeField] private float updateSpeed;
 
-    private void Start()
+    private KillableObject _killableObject;
+
+    private void Awake()
     {
-        
+        // Get the KillableObject component attached to the player
+        _killableObject = _assignedPlayer.GetComponent<KillableObject>();
     }
 
     private void Update()
     {
-        _playerCurLife = _assignedPlayer.GetComponent<KillableObject>().ObjectCurLife;
-        UpdateHealthUI();
+        // Calculate the current fill amount of the health bar
+        float fillAmount = ThomasMathematics.ProduitEnCroix(_killableObject.ObjectBaseLife,1 , _killableObject.ObjectCurLife) ;
+
+        // Smoothly interpolate the fill amount over time
+        _healthBar.fillAmount = Mathf.Lerp(_healthBar.fillAmount, fillAmount, Time.deltaTime * updateSpeed);
     }
-
-
-    private float barCurValue; 
-    [SerializeField] private float _updateTime;
-    void UpdateHealthUI()
-    {
-        float pLife = ThomasMathematics.ProduitEnCroix(_assignedPlayer.GetComponent<KillableObject>().ObjectBaseLife, 1, _playerCurLife); 
-        float barOldValue = 0;
-        float t = _updateTime * Time.deltaTime;
-        
-        if (barOldValue != pLife)
-        {
-            barOldValue = pLife;
-            barCurValue = Mathf.Lerp(barOldValue, pLife, t) ;
-           
-        }
-
-        _healthBar.fillAmount = barCurValue;
-    }
-
-    
 }
