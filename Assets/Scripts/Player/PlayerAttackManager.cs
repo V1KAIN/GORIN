@@ -76,8 +76,8 @@ public class PlayerAttackManager : MonoBehaviour
     [Header("Cooldowns")]
     [SerializeField] private float _normalSlashCD;
     [SerializeField] private bool _isAttacking = false;
-    [SerializeField] private float _fireballCD;
-    [SerializeField] private float _reinforceCD;
+    public float _fireballCD;
+    public float _reinforceCD;
     
     [Space]
     [SerializeField] private bool _haveAttackSpell = true;

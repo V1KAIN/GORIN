@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class HealthBarScript : MonoBehaviour
+public class PlayerUIScript : MonoBehaviour
 {
     [SerializeField] private GameObject _assignedPlayer;
     [SerializeField] private Image _healthBar;
@@ -26,5 +26,11 @@ public class HealthBarScript : MonoBehaviour
 
         // Smoothly interpolate the fill amount over time
         _healthBar.fillAmount = Mathf.Lerp(_healthBar.fillAmount, fillAmount, Time.deltaTime * updateSpeed);
+    }
+
+
+    void CheckCoolDowns(int skillID)
+    {
+        
     }
 }
