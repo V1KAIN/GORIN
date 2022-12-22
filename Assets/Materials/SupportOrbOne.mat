@@ -131,7 +131,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0.14637353, g: 3.441591, b: 0, a: 0}
-    - _MainColor: {r: 0.14633311, g: 0.6226415, b: 0.09104663, a: 0}
+    - _MainColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 0}
     - _NoiseSpeed: {r: -0.1, g: 0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _VoronoiColor: {r: 2.4943826, g: 5.7789197, b: 0.89954895, a: 0}

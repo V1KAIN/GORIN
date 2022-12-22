@@ -131,10 +131,10 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0.1324949, g: 3.120991, b: 3.1209924, a: 0}
-    - _MainColor: {r: 0.09019609, g: 0.62352943, b: 0.6040437, a: 0}
+    - _MainColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0}
     - _NoiseSpeed: {r: -0.1, g: 0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _VoronoiColor: {r: 0.9076839, g: 1.0038891, b: 5.7789207, a: 1}
+    - _VoronoiColor: {r: 0.9379399, g: 4.0025244, b: 5.7789216, a: 1}
     - _VoronoiSpeed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5532254589781356868
