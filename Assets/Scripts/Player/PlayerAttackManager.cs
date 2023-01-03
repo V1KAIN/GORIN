@@ -25,10 +25,26 @@ public class PlayerAttackManager : MonoBehaviour
         CheckUltimate();
     }
 
-    void GetPlayerInputs()
+    
+    public void OnAttackSkill(){if(!_isAttacking){CastSpell(1);}}
+    public void OnSupportSkill(){if(!_isAttacking){CastSpell(2);}}
+    public void OnUltimateSkill(){if(!_isAttacking &&  _canUseUltimate){CastSpell(3);}}
+
+    public void OnBasicAttack()
     {
+        if(!_isAttacking){
+            int slashAnim = Random.Range(0, 100);
+                
+            if(slashAnim >= 50) _playerModelAnimator.PlayAttackOneAnimation();
+            else _playerModelAnimator.PlayAttackTwoAnimation();
+            StartCoroutine(nameof(SlashCooldown));}
+    }
+    
+    void GetPlayerInputs()
+    {/*
         if (!_isAttacking)
         {
+            
             if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
             if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
             if (Input.GetKeyDown(_UltimateSpellKey) && _canUseUltimate) { CastSpell(3); }
@@ -42,6 +58,7 @@ public class PlayerAttackManager : MonoBehaviour
                 StartCoroutine(nameof(SlashCooldown));
             }
         }
+        */
     }
 
     //1 = AttackSpell || 2 = SupportSpell || 3 = UltimateSpell

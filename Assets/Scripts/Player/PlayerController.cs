@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -86,14 +88,16 @@ public class PlayerController : MonoBehaviour
             _characterController.Move(_moveDir);
         }
     }
-    
-    void GetPlayerInputs()
+
+    public void OnMove(InputValue value)
     {
-        _pInputs.x = (_curSpeed ) * Input.GetAxis("Horizontal");
-        _pInputs.z = (_curSpeed ) * Input.GetAxis("Vertical");
+        _pInputs.x = value.Get<Vector2>().x * _curSpeed;
+        _pInputs.z = value.Get<Vector2>().y * _curSpeed;
+    }
 
-
-        if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
+    public void OnDash()
+    {
+        if (_canDash && !_isDashing)
         {
             StartCoroutine(nameof(Dash));
             transform.rotation = _rotGoal;
@@ -108,36 +112,32 @@ public class PlayerController : MonoBehaviour
             _canDash = false;
         }
     }
-    
-    void GetSpeedByInputs()
-    {/*
-        if (_pInputs.x > 0.01f &&  _pInputs.z > 0.01f)
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
-            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
-        }
-        else if (_pInputs.x < 0.01f &&  _pInputs.z < 0.01f)
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
-            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
-        }
-        else if (_pInputs.x > 0.01f &&  _pInputs.z < 0.01f)
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
-            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
-        }
-        else if (_pInputs.x < 0.01f &&  _pInputs.z > 0.01f)
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal") /1.8f;
-            _pInputs.z = (_curSpeed / 100 ) * Input.GetAxis("Vertical") /1.8f ;
-        }
-        else
-        {
-            _pInputs.x = (_curSpeed / 100 ) * Input.GetAxis("Horizontal");
-            _pInputs.z = (_curSpeed / 100) * Input.GetAxis("Vertical");
-        }*/
+
+    void GetPlayerInputs()
+    {
         
+        
+       //_pInputs.x = (_curSpeed ) * Input.GetAxis("Horizontal");
+       // _pInputs.z = (_curSpeed ) * Input.GetAxis("Vertical");
+
+
+        /*if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
+        {
+            StartCoroutine(nameof(Dash));
+            transform.rotation = _rotGoal;
+            if (_dashForward)
+            {
+                _dashDir = transform.forward;
+            }
+            else
+            {
+                _dashDir = _moveDir * 10;
+            }
+            _canDash = false;
+        }*/
     }
+    
+    
 
     Vector3 mousePos = Vector3.zero;
     private Quaternion _rotGoal;
