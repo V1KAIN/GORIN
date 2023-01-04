@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _lookAtDir;
     void LookAtMousePosition()
     {
+        /*
         Ray mousePosRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mousePosRay, out RaycastHit hit, float.MaxValue, _groundLayer))
         {
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         _lookAtDir = (mousePos - transform.position).normalized;
         _rotGoal = Quaternion.LookRotation(_lookAtDir); _rotGoal.x = 0; _rotGoal.z = 0;
         if(_lookAtMousePos)transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
+        */
     }
 
     private Vector3 _dashDir = new Vector3();
