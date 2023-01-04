@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        GetPlayerInputs();
         LookAtMousePosition();
         
         _curSpeed = _walkingSpeed;
@@ -65,6 +64,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+    }
+
+    public void AssignVariables()
+    {
+        _characterController = GetComponent<CharacterController>();
+        _attackController = GetComponent<PlayerAttackManager>();
+        _playerModelAnimator = GetComponent<PlayerAnimationController>();
+        _meshTrail = GetComponent<MeshTrailScript>();
     }
 
     void Movement()
@@ -112,33 +119,7 @@ public class PlayerController : MonoBehaviour
             _canDash = false;
         }
     }
-
-    void GetPlayerInputs()
-    {
-        
-        
-       //_pInputs.x = (_curSpeed ) * Input.GetAxis("Horizontal");
-       // _pInputs.z = (_curSpeed ) * Input.GetAxis("Vertical");
-
-
-        /*if (Input.GetButtonDown("Jump") && _canDash && !_isDashing)
-        {
-            StartCoroutine(nameof(Dash));
-            transform.rotation = _rotGoal;
-            if (_dashForward)
-            {
-                _dashDir = transform.forward;
-            }
-            else
-            {
-                _dashDir = _moveDir * 10;
-            }
-            _canDash = false;
-        }*/
-    }
     
-    
-
     Vector3 mousePos = Vector3.zero;
     private Quaternion _rotGoal;
     private Vector3 _lookAtDir;
