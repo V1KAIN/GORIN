@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayersManager : MonoBehaviour
@@ -10,11 +12,38 @@ public class PlayersManager : MonoBehaviour
     
     //Use to launch game
     public static bool _enoughPlayersConnected;
+    int currentSpawnedPlayers = 0;
 
-
-    private void GetPlayerToSpawnPos()
+    public void Update()
     {
+        if (currentSpawnedPlayers == _neededPlayersToLaunch)
+        {
+            _enoughPlayersConnected = true;
+        }
         
+        SpawnPlayers();
+    }
+
+    void SpawnPlayers()
+    {
+        if (currentSpawnedPlayers < _connectedPlayers.Count)
+        {
+            GetPlayerToSpawnPos(_connectedPlayers[^1]);
+            currentSpawnedPlayers = _connectedPlayers.Count;
+        }
+    }
+
+    public void StartPlayers()
+    {
+        foreach (GameObject player in _connectedPlayers)
+        {
+            player.GetComponent<PlayerConnectScript>().PlayerStartPlay();
+        }
+    }
+
+    private void GetPlayerToSpawnPos(GameObject playerToSpawn)
+    {
+        playerToSpawn.transform.position = _PlayersSpawnPoints[_connectedPlayers.IndexOf(playerToSpawn)].position;
     }
     
     public void ConnectPlayer(GameObject playerToConnect)
