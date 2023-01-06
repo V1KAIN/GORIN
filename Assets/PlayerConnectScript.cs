@@ -11,6 +11,7 @@ public class PlayerConnectScript : MonoBehaviour
 
     private void Start()
     {
+        _playersManager = GameObject.FindWithTag("MultiplayerManager").GetComponent<PlayersManager>();
         _playersManager.ConnectPlayer(gameObject);
         FreezePlayer();
     }
