@@ -13,10 +13,9 @@ public class PlayerUIScript : MonoBehaviour
 
     private KillableObject _killableObject;
 
-    private void Awake()
+    private void Start()
     {
-        // Get the KillableObject component attached to the player
-        _killableObject = _assignedPlayer.GetComponent<KillableObject>();
+        AssignVariables();
     }
 
     private void Update()
@@ -32,5 +31,15 @@ public class PlayerUIScript : MonoBehaviour
     void CheckCoolDowns(int skillID)
     {
         
+    }
+
+    public void AssignVariables()
+    {
+        _killableObject = _assignedPlayer.GetComponent<KillableObject>();
+    }
+
+    public void AssignUIToPlayer(GameObject player)
+    {
+        _assignedPlayer = player;
     }
 }

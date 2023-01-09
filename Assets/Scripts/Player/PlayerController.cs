@@ -45,10 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        _characterController = GetComponent<CharacterController>();
-        _attackController = GetComponent<PlayerAttackManager>();
-        _playerModelAnimator = GetComponent<PlayerAnimationController>();
-        _meshTrail = GetComponent<MeshTrailScript>();
+        AssignVariables();
     }
 
     void Update()
@@ -173,7 +170,7 @@ public class PlayerController : MonoBehaviour
         _attackController.ResetCooldowns();
         Debug.Log("Reset all cooldowns apart form UltimateSkill");
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

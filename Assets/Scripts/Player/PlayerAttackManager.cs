@@ -6,22 +6,16 @@ using Random = UnityEngine.Random;
 
 public class PlayerAttackManager : MonoBehaviour
 {
-    [Header("PlayerInputSettings")] 
-    [SerializeField] private KeyCode _attackSpellKey = KeyCode.R;
-    [SerializeField] private KeyCode _supportSpellKey = KeyCode.F;
-    [SerializeField] private KeyCode _UltimateSpellKey = KeyCode.W;
+    [Header("PlayerInputSettings")]
     private PlayerAnimationController _playerModelAnimator;
     
-
     private void Start()
     {
-        _playerModelAnimator = GetComponent<PlayerAnimationController>();
-        _isAttacking = false;
+        AssignVariables();
     }
 
     private void Update()
     {
-        GetPlayerInputs();
         CheckUltimate();
     }
 
@@ -38,27 +32,6 @@ public class PlayerAttackManager : MonoBehaviour
             if(slashAnim >= 50) _playerModelAnimator.PlayAttackOneAnimation();
             else _playerModelAnimator.PlayAttackTwoAnimation();
             StartCoroutine(nameof(SlashCooldown));}
-    }
-    
-    void GetPlayerInputs()
-    {/*
-        if (!_isAttacking)
-        {
-            
-            if (Input.GetKeyDown(_attackSpellKey)) { CastSpell(1); }
-            if (Input.GetKeyDown(_supportSpellKey)) { CastSpell(2); }
-            if (Input.GetKeyDown(_UltimateSpellKey) && _canUseUltimate) { CastSpell(3); }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                int slashAnim = Random.Range(0, 100);
-                
-                if(slashAnim >= 50) _playerModelAnimator.PlayAttackOneAnimation();
-                else _playerModelAnimator.PlayAttackTwoAnimation();
-                StartCoroutine(nameof(SlashCooldown));
-            }
-        }
-        */
     }
 
     //1 = AttackSpell || 2 = SupportSpell || 3 = UltimateSpell
@@ -154,5 +127,11 @@ public class PlayerAttackManager : MonoBehaviour
         _isAttacking = false;
         _haveAttackSpell = true;
         _haveSupportSpell = true;
+    }
+
+    public void AssignVariables()
+    {
+        _playerModelAnimator = GetComponent<PlayerAnimationController>();
+        _isAttacking = false;
     }
 }

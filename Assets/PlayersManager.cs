@@ -8,11 +8,21 @@ public class PlayersManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _connectedPlayers;
     [SerializeField] private List<Transform> _PlayersSpawnPoints;
+    [SerializeField] private List<GameObject> _playerUIElements;
     [SerializeField] [Range(1,10)] private int _neededPlayersToLaunch;
+    [SerializeField] private GameManager _gameManager;
     
     //Use to launch game
     public static bool _enoughPlayersConnected;
     int currentSpawnedPlayers = 0;
+
+    private void Start()
+    {
+        foreach (GameObject uiElement in _playerUIElements)
+        {
+            uiElement.GetComponent<PlayerUIScript>().enabled = false;
+        }
+    }
 
     public void Update()
     {
@@ -44,6 +54,7 @@ public class PlayersManager : MonoBehaviour
     private void GetPlayerToSpawnPos(GameObject playerToSpawn)
     {
         playerToSpawn.transform.position = _PlayersSpawnPoints[_connectedPlayers.IndexOf(playerToSpawn)].position;
+        _playerUIElements[_connectedPlayers.IndexOf(playerToSpawn)].GetComponent<PlayerUIScript>().AssignUIToPlayer(playerToSpawn);
     }
     
     public void ConnectPlayer(GameObject playerToConnect)
