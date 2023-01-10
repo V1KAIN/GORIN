@@ -20,6 +20,7 @@ public class PlayerConnectScript : MonoBehaviour
     //Enables and assign the player scripts 
     public void PlayerStartPlay()
     {
+        //
         _playerController.enabled = true;
         _playerController.AssignVariables();
         //
@@ -35,5 +36,7 @@ public class PlayerConnectScript : MonoBehaviour
         _playerController.enabled = false;
         _playerAttackManager.enabled = false;
         _playerRelatedUI.enabled = false;
+        //
+        _playerController.gameObject.SetActive(false);
     }
 }

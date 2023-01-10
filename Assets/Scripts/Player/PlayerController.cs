@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float _dashSpeed = 3f;
     [SerializeField]float _dashTime = 0.3f;
     [SerializeField]float _dashCooldown = 4f;
-    
+    [Space]
     [Header("Settings")] 
     [SerializeField] private float _playerLookAtSpeed = .2f;
     [SerializeField] private PlayerAnimationController _playerModelAnimator;
@@ -23,26 +23,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private bool _movementRelativeToRot;
     [SerializeField] private bool _dashForward;
-    
     [Space]
-    //Privates
-    float _curSpeed;
-    CharacterController _characterController;
-    PlayerAttackManager _attackController;
-    Vector3 _pInputs = Vector3.zero;
-    Vector3 _moveDir = Vector3.zero;
-    private bool _canDash = true;
-    private bool _isDashing = false;
-    private bool _lookAtMousePos = true;
-        
-    //Hidden
-    [HideInInspector] public bool CanMove = true;
-
     [Header("DEBUG")]
     public float curXVel;
     public float curZVel; 
     public float curYVel;
-
+    
+    //Privates
+    private float _curSpeed;
+    private CharacterController _characterController;
+    private PlayerAttackManager _attackController;
+    private Vector3 _pInputs = Vector3.zero;
+    private Vector3 _moveDir = Vector3.zero;
+    private bool _canDash = true;
+    private bool _isDashing;
+    private bool _lookAtMousePos = true;
+        
+    //Hidden
+    [HideInInspector] public bool CanMove = true;
+    
     void Start()
     {
         AssignVariables();
@@ -50,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        LookAtMousePosition();
-        
         _curSpeed = _walkingSpeed;
         curXVel = _characterController.velocity.x;
         curZVel = _characterController.velocity.z;
@@ -120,21 +117,6 @@ public class PlayerController : MonoBehaviour
     Vector3 mousePos = Vector3.zero;
     private Quaternion _rotGoal;
     private Vector3 _lookAtDir;
-    void LookAtMousePosition()
-    {
-        /*
-        Ray mousePosRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(mousePosRay, out RaycastHit hit, float.MaxValue, _groundLayer))
-        {
-            mousePos = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-        }
-        
-        _lookAtDir = (mousePos - transform.position).normalized;
-        _rotGoal = Quaternion.LookRotation(_lookAtDir); _rotGoal.x = 0; _rotGoal.z = 0;
-        if(_lookAtMousePos)transform.rotation = Quaternion.Slerp(transform.rotation, _rotGoal, _playerLookAtSpeed);
-        */
-    }
-
     private Vector3 _dashDir = new Vector3();
     IEnumerator Dash()
     {

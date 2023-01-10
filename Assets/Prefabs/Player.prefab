@@ -1615,9 +1615,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4171088313e96419cbf3fff6e5513b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackSpellKey: 114
-  _supportSpellKey: 102
-  _UltimateSpellKey: 119
   _normalSlashCD: 1.36
   _isAttacking: 0
   _fireballCD: 6
@@ -1707,6 +1704,7 @@ MonoBehaviour:
   _playersManager: {fileID: 0}
   _playerController: {fileID: 2715989795632630785}
   _playerAttackManager: {fileID: 2715989795632630845}
+  _playerRelatedUI: {fileID: 0}
 --- !u!1 &2715989795665668339
 GameObject:
   m_ObjectHideFlags: 0
